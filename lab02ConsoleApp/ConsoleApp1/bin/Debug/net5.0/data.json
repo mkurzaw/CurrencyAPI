@@ -1,14 +1,12 @@
-[
-  {
-    "studentId": 1,
-    "studentName": "Adam"
-  },
-  {
-    "studentId": 2,
-    "studentName": "Bartek"
-  },
-  {
-    "studentId": 3,
-    "studentName": "Czarek"
+{
+  "disclaimer": "Usage subject to terms: https://openexchangerates.org/terms",
+  "license": "https://openexchangerates.org/license",
+  "timestamp": 1648511999,
+  "base": "USD",
+  "rates": {
+    "CHF": 0.933502,
+    "EUR": 0.909802,
+    "GBP": 0.763347,
+    "PLN": 4.271529
   }
-]
+}

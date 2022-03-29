@@ -12,4 +12,5 @@ namespace ConsoleApp1
         public string currencyName { set; get; }
         public float currencyRate { set; get; }
     }
+
 }
