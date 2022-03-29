@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-
+using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
@@ -42,8 +42,9 @@ namespace ConsoleApp1
             var json = File.ReadAllText("data.json");
             Console.WriteLine(json);
 
-            
-     
+            // deserializacja (nie działa)
+            //List<SeriesPerDate> seriesPerDate = JsonConvert.DeserializeObject<List<SeriesPerDate>>(json);
+
 
         }
     }
