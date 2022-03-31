@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\lab02ConsoleApp",
+    "\\lab02ConsoleApp\\ConsoleApp1"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\lab02ConsoleApp\\ConsoleApp1\\Rates.cs",
   "PreviewInSolutionExplorer": false
 }

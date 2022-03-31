@@ -1,12 +1,12 @@
 {
   "disclaimer": "Usage subject to terms: https://openexchangerates.org/terms",
   "license": "https://openexchangerates.org/license",
-  "timestamp": 1126108800,
+  "timestamp": 952016400,
   "base": "USD",
   "rates": {
-    "CHF": 1.240677,
-    "EUR": 0.804472,
-    "GBP": 0.544065,
-    "PLN": 3.153401
+    "CHF": 1.66116,
+    "EUR": 1.035393,
+    "GBP": 0.633121,
+    "PLN": 4.11383
   }
 }

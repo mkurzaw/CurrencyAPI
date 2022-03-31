@@ -12,7 +12,8 @@ namespace ConsoleApp1
         public string license { set; get; }
         public long timestamp { set; get; }
         public string Base { set; get; }
-        List<Rates> rates { set; get; }
+        public Rates rates { set; get; }
+        
 
     }
 }

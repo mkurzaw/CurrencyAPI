@@ -7,45 +7,57 @@ using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
+
     internal class Program
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Podaj datę w formacie: RRRR-MM-DD\t");
-            string date;
-            date = Console.ReadLine();
+            Console.WriteLine("Podaj datę początkową w formacie: RRRR-MM-DD (późniejszą od 1999-01-01)\t");
+            string startDate;
+            startDate = Console.ReadLine();
 
-            /*
-            // obsługa błędu niepoprawnego formatu
-            string yearString = date[0] + date[1] + date[2] + date[3];
-            int tmp0 = Int32.Parse(yearString);
-            int tmp1 = Convert.ToInt32(date[1]);
-            int tmp2 = Convert.ToInt32(date[2]);
-            int tmp3 = Convert.ToInt32(date[3]);
-            int year = (tmp0*1000) + (tmp1*100) + (tmp2*10) + (tmp3);
-            Console.WriteLine(tmp0);
-            Console.WriteLine(tmp1);
-            Console.WriteLine(year);
-            */
+            Console.WriteLine("Podaj datę końcową w formacie: RRRR-MM-DD\t");
+            string endDate;
+            endDate = Console.ReadLine();
 
-           
+            DateTime StartDate = Convert.ToDateTime(startDate);
+            DateTime EndDate = Convert.ToDateTime(endDate);
 
-            // wysłanie rządania do serwisu API oraz zapis w zmiennej
-            string call = $"https://openexchangerates.org/api/historical/{date}.json?app_id=8d4a6a6c55ad4d93896b50921077c1d9&symbols=PLN,GBP,EUR,CHF";
-            HttpClient client = new HttpClient();
-            string response = await client.GetStringAsync(call);
+            List<SeriesPerDate> listOfSeries = new List<SeriesPerDate>();
 
-            // zapis otrzymanego jsona do pliku data.json
-            await File.WriteAllTextAsync("data.json", response);
+            int i = -1;
+            foreach (DateTime day in EachCalendarDay(StartDate, EndDate))
+            {
+                Console.WriteLine(day.ToString("yyyy-MM-dd"));
 
-            // odczyt pliku data.json
-            var json = File.ReadAllText("data.json");
-            Console.WriteLine(json);
+                /*
+                i++;
 
-            // deserializacja (nie działa)
-            //List<SeriesPerDate> seriesPerDate = JsonConvert.DeserializeObject<List<SeriesPerDate>>(json);
+                // wysłanie rządania do serwisu API oraz zapis w zmiennej
+                HttpClient client = new HttpClient();
+                string call = $"https://openexchangerates.org/api/historical/{day.ToString("yyyy-mm-dd")}.json?app_id=8d4a6a6c55ad4d93896b50921077c1d9&symbols=PLN,GBP,EUR,CHF";
+                string response = await client.GetStringAsync(call);
+
+                // zapis otrzymanego jsona do pliku data.json
+                await File.WriteAllTextAsync("data.json", response);
+
+                // odczyt pliku data.json
+                var json = File.ReadAllText("data.json");
+
+                listOfSeries.Add(JsonConvert.DeserializeObject<SeriesPerDate>(json));
+
+                Console.WriteLine(listOfSeries[i].rates.PLN + day.ToString("yyyy-mm-dd"));
+                */
+            }
 
 
+
+        }
+
+        public static IEnumerable<DateTime> EachCalendarDay(DateTime startDate, DateTime endDate)
+        {
+            for (var date = startDate.Date; date.Date <= endDate.Date; date = date.AddDays(1)) yield
+            return date;
         }
     }
 }
