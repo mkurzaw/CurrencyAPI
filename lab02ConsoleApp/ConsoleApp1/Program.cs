@@ -4,6 +4,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace ConsoleApp1
 {
@@ -26,16 +27,17 @@ namespace ConsoleApp1
             List<SeriesPerDate> listOfSeries = new List<SeriesPerDate>();
 
             int i = -1;
+            var context = new BazaWalut();
             foreach (DateTime day in EachCalendarDay(StartDate, EndDate))
             {
                 Console.WriteLine(day.ToString("yyyy-MM-dd"));
 
-                /*
+               
                 i++;
-
+                
                 // wysłanie rządania do serwisu API oraz zapis w zmiennej
                 HttpClient client = new HttpClient();
-                string call = $"https://openexchangerates.org/api/historical/{day.ToString("yyyy-mm-dd")}.json?app_id=8d4a6a6c55ad4d93896b50921077c1d9&symbols=PLN,GBP,EUR,CHF";
+                string call = $"https://openexchangerates.org/api/historical/{day.ToString("yyyy-MM-dd")}.json?app_id=8d4a6a6c55ad4d93896b50921077c1d9&symbols=PLN,GBP,EUR,CHF";
                 string response = await client.GetStringAsync(call);
 
                 // zapis otrzymanego jsona do pliku data.json
@@ -45,12 +47,14 @@ namespace ConsoleApp1
                 var json = File.ReadAllText("data.json");
 
                 listOfSeries.Add(JsonConvert.DeserializeObject<SeriesPerDate>(json));
-
-                Console.WriteLine(listOfSeries[i].rates.PLN + day.ToString("yyyy-mm-dd"));
-                */
+                
+                Console.WriteLine(listOfSeries[i].rates.PLN + day.ToString("yyyy-MM-dd"));
+                context.Dane.Add(new SeriesPerDate { Base = listOfSeries[i].Base, rates = listOfSeries[i].rates });
+                context.SaveChanges();
+                
             }
 
-
+           // var dates = (from d in context.Dane select d).ToList<SeriesPerDate>();
 
         }
 

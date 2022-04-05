@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    internal class Rates
+    public class Rates
     {
         public float CHF { set; get; }
         public float EUR { set; get; }
