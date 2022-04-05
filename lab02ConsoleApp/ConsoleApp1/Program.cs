@@ -13,6 +13,7 @@ namespace ConsoleApp1
     {
         static async Task Main(string[] args)
         {
+            /*
             Console.WriteLine("Podaj datę początkową w formacie: RRRR-MM-DD (późniejszą od 1999-01-01)\t");
             string startDate;
             startDate = Console.ReadLine();
@@ -28,6 +29,7 @@ namespace ConsoleApp1
 
             int i = -1;
             var context = new BazaWalut();
+            
             foreach (DateTime day in EachCalendarDay(StartDate, EndDate))
             {
                 Console.WriteLine(day.ToString("yyyy-MM-dd"));
@@ -53,9 +55,12 @@ namespace ConsoleApp1
                 context.SaveChanges();
                 
             }
-
-           // var dates = (from d in context.Dane select d).ToList<SeriesPerDate>();
-
+            */
+            var dates = (from d in context.ExchangeStatistics select d).ToList<SeriesPerDate>();
+            foreach (var st in dates)
+            {
+                Console.WriteLine("ID: {0}, Time: {1}, PLN-USD Rate: {2:0.00}", st.ID, st.timestamp, st.rates.PLN);
+            }
         }
 
         public static IEnumerable<DateTime> EachCalendarDay(DateTime startDate, DateTime endDate)
@@ -63,5 +68,11 @@ namespace ConsoleApp1
             for (var date = startDate.Date; date.Date <= endDate.Date; date = date.AddDays(1)) yield
             return date;
         }
+
+        public class ExchangeStatistics : DbContext
+        {
+            public virtual DbSet<SeriesPerDate> seriesPerDateAll { get; set; }
+        }
+
     }
 }
